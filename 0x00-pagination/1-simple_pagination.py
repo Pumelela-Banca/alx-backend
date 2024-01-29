@@ -4,10 +4,10 @@ Gets values and returns indexes
 """
 import csv
 import math
-from typing import List
+from typing import List, Tuple
 
 
-def index_range(page: int, page_size: int) -> List[int, int]:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
     return a tuple of size two containing a start
     index and an end index corresponding to the
@@ -45,8 +45,8 @@ class Server:
                                        " and/or page_size are not ints")
         assert isinstance(page_size, int), ("raised when page"
                                             " and/or page_size are not ints")
-        assert page_size <= 0, "with negative values"
-        assert page < 0, "raised with 0"
+        assert page_size >= 0, "with negative values"
+        assert page > 0, "raised with 0"
         start, end = index_range(page, page_size)
         data = self.dataset()
         if start > len(data):

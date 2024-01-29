@@ -37,15 +37,17 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List:
+    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
         Returns page with data
         """
-        assert isinstance(page, int) and page > 0
-        assert isinstance(page_size, int) and page_size > 0
-        ranges = index_range(page, page_size)
-        end = ranges[1]
-        start = ranges[0]
+        assert isinstance(page, int), ("when page"
+                                       " and/or page_size are not ints")
+        assert isinstance(page_size, int), ("raised when page"
+                                            " and/or page_size are not ints")
+        assert page_size >= 0, "with negative values"
+        assert page > 0, "raised with 0"
+        start, end = index_range(page, page_size)
         data = self.dataset()
         if start > len(data):
             return []
@@ -64,14 +66,3 @@ class Server:
         new_dict["prev_page"] = page - 1 if start > 0 else None
         new_dict["total_pages"] = math.ceil(len(self.__dataset) / page_size)
         return new_dict
-
-
-server = Server()
-
-print(server.get_hyper(1, 2))
-print("---")
-print(server.get_hyper(2, 2))
-print("---")
-print(server.get_hyper(100, 3))
-print("---")
-print(server.get_hyper(3000, 100))
