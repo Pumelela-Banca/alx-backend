@@ -4,7 +4,7 @@ implements get page
 """
 import csv
 import math
-from typing import List
+from typing import List, Dict
 
 
 def index_range(page: int, page_size: int) -> List[int, int]:
@@ -37,7 +37,7 @@ class Server:
 
         return self.__dataset
 
-    def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+    def get_page(self, page: int = 1, page_size: int = 10) -> Dict:
         """
         Returns page with data
         """
@@ -51,5 +51,14 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
         """
-
+        returns a dictionary with details about the current list
         """
+        new_dict = {}
+        start, end = index_range(page, page_size)
+        new_dict["page_size"] = len(self.get_page(page, page_size))
+        new_dict["page"] = page
+        new_dict["data"] = self.get_page(page, page_size)
+        new_dict["next_page"] = page + 1 if end < len(self.__dataset) else None
+        new_dict["prev_page"] = page - 1 if start > 0 else None
+        new_dict["total_pages"] = math.ceil(len(self.__dataset) / page_size)
+        return new_dict
