@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Gets values and returns indexes
+implements get page
 """
 import csv
 import math
@@ -41,14 +41,15 @@ class Server:
         """
         Returns page with data
         """
-        assert isinstance(page, int), ("AssertionError raised when page"
-                                       " and/or page_size are not ints")
-        assert isinstance(page_size, int), ("AssertionError raised when page"
-                                            " and/or page_size are not ints")
-        assert page_size <= 0, "AssertionError raised with negative values"
-        assert page < 0, "AssertionError raised with 0"
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
         start, end = index_range(page, page_size)
         data = self.dataset()
         if start > len(data):
             return []
-        return data[start: end]
+        return data[start, end]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """
+
+        """
