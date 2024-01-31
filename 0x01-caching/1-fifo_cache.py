@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-
+FIFO caching implementations of put and get
 """
 BaseCaching = __import__('base_caching').BaseCaching
 
