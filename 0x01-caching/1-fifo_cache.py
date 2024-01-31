@@ -13,7 +13,7 @@ class FIFOCache(BaseCaching):
         """
         added order of items
         """
-        super().__init__
+        super().__init__()
         self.order = []
 
     def put(self, key, item):
