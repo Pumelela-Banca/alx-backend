@@ -3,10 +3,10 @@
 Has a class called basic cache that stores
 basic information
 """
-BasicCaching = __import__('base_caching').BasicCaching
+BaseCaching = __import__('base_caching').BaseCaching
 
 
-class BasicCache(BasicCaching):
+class BasicCache(BaseCaching):
     """
     Inherits from BasicCaching and implements put and get
     """
