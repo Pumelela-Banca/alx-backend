@@ -32,10 +32,10 @@ def get_locale() -> str:
     """
     Gets locale for page
     """
-    if request.args.get("locale") in app.config["LANGUAGES"]:
-        return request.args.get("locale")
-    return (
-        request.accept_languages.best_match(app.config["LANGUAGES"]))
+    locale = request.args.get("locale")
+    if locale in Config.LANGUAGES:
+        return locale
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 
 if __name__ == '__main__':
